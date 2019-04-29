@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import cn.iipc.android.tweetlib.*;
+
 
 public class HelloActivity extends AppCompatActivity {
 
@@ -44,6 +46,7 @@ public class HelloActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            new SubmitProgram().doSubmit(this, "A1");
             return true;
         }
 
