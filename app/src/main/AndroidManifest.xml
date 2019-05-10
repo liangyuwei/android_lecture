@@ -7,14 +7,14 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="梁煜伟"
+        android:label="liangyuwei"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
         <activity
             android:name=".HelloActivity"
-            android:label="梁煜伟"
+            android:label="liangyuwei"
             android:theme="@style/AppTheme.NoActionBar">
             <!--intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
             </intent-filter-->
         </activity>
 
-        <activity android:name=".CalcActivity" android:label="计算器">
+        <activity android:name=".CalcActivity" android:label="计算器 by liangyuwei">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

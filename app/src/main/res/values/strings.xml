@@ -2,4 +2,5 @@
     <string name="app_name">liangyuwei</string>
     <string name="hello_world">Hello World!</string>>
     <string name="action_settings">Upload Assignments</string>
+    <string name="times">×</string>
 </resources>
