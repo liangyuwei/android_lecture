@@ -31,7 +31,7 @@ public class CalcActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            new SubmitProgram().doSubmit(this, "A1");
+            new SubmitProgram().doSubmit(this, "B1");
             return true;
         }
 
