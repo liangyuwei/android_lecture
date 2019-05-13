@@ -1,19 +1,30 @@
 package cn.zju.id21832004.liangyuwei;
 
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import cn.iipc.android.tweetlib.SubmitProgram;
+import android.widget.EditText;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class CalcActivity extends AppCompatActivity {
+public class PostActivity extends AppCompatActivity {
+
+    // Newly added
+    private Button button;
+    private EditText editText;
+    private TextView pkgname, count;
+
+    // ?????
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calc);
+        setContentView(R.layout.activity_post);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -31,12 +42,12 @@ public class CalcActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            new SubmitProgram().doSubmit(this, "B1");
+            new SubmitProgram().doSubmit(this, "C1");
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-}
 
+}

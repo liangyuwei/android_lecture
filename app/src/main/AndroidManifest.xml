@@ -11,11 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".HelloActivity"
             android:label="liangyuwei"
             android:theme="@style/AppTheme.NoActionBar">
+
+            <!--
+            intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter
+            -->
+        </activity>
+        <activity
+            android:name=".CalcActivity"
+            android:label="计算器 by liangyuwei">
             <!--intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,12 +34,18 @@
             </intent-filter-->
         </activity>
 
-        <activity android:name=".CalcActivity" android:label="计算器 by liangyuwei">
+        <activity android:name=".StatusActivity" />
+
+        <activity android:name=".PostActivity" android:label="liangyuwei">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
+
     </application>
 
 </manifest>
