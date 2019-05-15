@@ -4,15 +4,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import cn.iipc.android.tweetlib.SubmitProgram;
 
 public class StatusActivity extends AppCompatActivity {
 
+    private EditText editStatus;
+    private Button btnPost;
+    private TextView txtCount, pkgName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
+
+        editStatus = (EditText) findViewById(R.id.editStatus);
+        btnPost = (Button) findViewById(R.id.btnPost);
+        txtCount = (TextView) findViewById(R.id.txtCount);
+
+        pkgName = (TextView) findViewById(R.id.txtPkg);
+        pkgName.setText(this.getPackageName());
     }
 
 
