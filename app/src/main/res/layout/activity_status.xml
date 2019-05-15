@@ -1,9 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cn.zju.id21832004.liangyuwei.StatusActivity">
+    tools:context="cn.zju.id21832004.liangyuwei.StatusActivity"
+    >
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/txtPkg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/package_name"
+        android:textSize="20sp"
+        android:background="@android:color/holo_green_light"/>
+
+    <TextView
+        android:id="@+id/txtCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="140"
+        android:textSize="30sp"
+        android:layout_marginStart="24dp"
+        android:layout_below="@+id/txtPkg"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp"
+        android:textColor="@color/colorAccent"/>
+
+    <Button
+        android:id="@+id/btnPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/txtCount"
+        android:layout_marginEnd="15dp"
+        android:text="提交"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/editStatus"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnPost"
+        android:layout_alignParentEnd="true"
+        android:gravity="top|left"
+        android:text="有什么新鲜事。。。"
+        android:background="@android:drawable/editbox_background_normal"/>
+
+
+</RelativeLayout>
