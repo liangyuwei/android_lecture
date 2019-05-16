@@ -13,9 +13,9 @@ import android.widget.TextView;
 public class PostActivity extends AppCompatActivity {
 
     // Newly added
-    private Button button;
-    private EditText editText;
-    private TextView pkgname, count;
+    private Button btnPost;
+    private EditText editStatus;
+    private TextView pkgName, txtCount;
 
     // ?????
 
@@ -23,6 +23,12 @@ public class PostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+        editStatus = (EditText) findViewById(R.id.editStatus);
+        btnPost = (Button) findViewById(R.id.btnPost);
+        txtCount = (TextView) findViewById(R.id.txtCount);
+
+        pkgName = (TextView) findViewById(R.id.txtPkg);
+        pkgName.setText(this.getPackageName());
     }
 
 
