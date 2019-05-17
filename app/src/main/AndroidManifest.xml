@@ -27,18 +27,18 @@
         <activity
             android:name=".CalcActivity"
             android:label="计算器 by liangyuwei">
-            <!--intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter-->
+            </intent-filter>
         </activity>
 
         <activity android:name=".StatusActivity" android:label="发布微博">
-            <intent-filter>
+            <!--intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter-->
         </activity>
 
         <activity android:name=".PostActivity" android:label="liangyuwei">
