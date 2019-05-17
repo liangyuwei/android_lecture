@@ -7,6 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+
 import cn.iipc.android.tweetlib.SubmitProgram;
 import static java.lang.System.*;
 
@@ -16,11 +19,6 @@ public class CalcActivity extends AppCompatActivity implements View.OnClickListe
     private TextView txtScreen, txtResult;
 
     private int computationResult = 0;
-    private boolean afterNumber = true;
-
-    private int symbols[] = new int[4]; // denotes +, -, *, /
-    private boolean localCal = false; // true only when * or / is used
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +76,37 @@ public class CalcActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
-    private int getInputNumber(int viewId){
-        int id = -1;
-        for (int i=0; i<=9; i++) {
-            if(viewId == getResources().getIdentifier("btn" + i, "id", this.getPackageName() )){
-                id = i;
+    public int computeExpression(String expr){
+
+        // Prep
+        ArrayList<Integer> numList = new ArrayList<Integer>();
+        ArrayList<Character> signList = new ArrayList<Character>();
+        int tmp = 0;
+
+        // Parse numbers and symbols
+        for (int i=0; i<=expr.length()-1; i++){
+            // get the character
+            char ch = expr.charAt(i);
+            // check if it's a number
+            if (Character.isDigit(ch)){ // is a number
+                tmp = tmp * 10 + Integer.parseInt(String.valueOf(ch));
+            }
+            else{  // is a symbol
+                numList.add(tmp);
+                tmp = 0; // reset
+                signList.add(ch);
             }
         }
-        return id;
+        numList.add(tmp); // The last one
+
+        // Evaluate the expression
+        // set blocks divided by "+" and "-"
+        // ArrayList<Integer> numListNew = // can use fixed array!!!
+        // ArrayList<Chatacter> // use fixed ??/
+        // divide and compute based on signList
+
+        return tmp;
+
     }
 
     @Override
@@ -103,11 +124,13 @@ public class CalcActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnEqual:
                 if (Character.isDigit(lastChar)) {
-                    txtScreen.setText("Compute result");
-                    txtResult.setText("Result");
+                    //txtScreen.setText("Compute result");
+                    // call function to cumpute the expression
+                    computationResult = computeExpression(txtScreen.getText().toString());
+                    txtResult.setText(Integer.toString(computationResult));
                 }
                 else{
-                    txtResult.setText("Error");
+                    txtResult.setText("The last character should be a number!");
                 }
                 break;
             default:
