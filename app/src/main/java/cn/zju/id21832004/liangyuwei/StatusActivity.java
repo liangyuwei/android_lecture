@@ -36,6 +36,7 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
         txtCount = (TextView) findViewById(R.id.txtCount);
 
         pkgName = (TextView) findViewById(R.id.txtPkg);
+
         pkgName.setText(this.getPackageName());
 
         btnPost.setOnClickListener(this); // ??
@@ -61,7 +62,7 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            new SubmitProgram().doSubmit(this, "C1");
+            new SubmitProgram().doSubmit(this, "C3");//"C1");
             return true;
         }
 
