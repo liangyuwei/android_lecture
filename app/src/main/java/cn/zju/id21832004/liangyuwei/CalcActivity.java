@@ -78,12 +78,12 @@ public class CalcActivity extends AppCompatActivity implements View.OnClickListe
 
     public int computeExpression(String expr){
 
-        // Prep
+        // Prep //
         ArrayList<Integer> numList = new ArrayList<Integer>();
         ArrayList<Character> signList = new ArrayList<Character>();
         int tmp = 0;
 
-        // Parse numbers and symbols
+        // Parse numbers and symbols //
         for (int i=0; i<=expr.length()-1; i++){
             // get the character
             char ch = expr.charAt(i);
@@ -99,13 +99,48 @@ public class CalcActivity extends AppCompatActivity implements View.OnClickListe
         }
         numList.add(tmp); // The last one
 
-        // Evaluate the expression
-        // set blocks divided by "+" and "-"
-        // ArrayList<Integer> numListNew = // can use fixed array!!!
-        // ArrayList<Chatacter> // use fixed ??/
-        // divide and compute based on signList
+        // Evaluate the expression //
+        int numPlusMinus = 0;
+        // get the number of + and - symbols
+        for (int i=0; i<signList.size(); i++) {
+            if (signList.get(i) == '+' || signList.get(i) == '-'){
+                numPlusMinus++;
+            }
+        }
+        int numListNew[] = new int[numPlusMinus + 1];
+        char signListNew[] = new char[numPlusMinus];
+        // Iterate to perform * and / operations
+        tmp = numList.get(0); // get the first number
+        int subid = 0;
+        for (int i=0; i<signList.size(); i++){
+            switch (signList.get(i)){
+                case '*':
+                    tmp *= numList.get(i+1);
+                    break;
+                case '/':
+                    tmp /= numList.get(i+1);
+                    break;
+                default: // + or -
+                    numListNew[subid] = tmp;
+                    signListNew[subid] = signList.get(i); // store the sign
+                    tmp = numList.get(i+1); // set to the next number
+                    subid++;
+                    break;
+            }
+        }
+        numListNew[subid] = tmp; // push the last number
+        // Iterate to perform + and - operations
+        int result = numListNew[0];
+        for (int i=0; i<signListNew.length; i++){
+            if(signListNew[i] == '+'){
+                result += numListNew[i+1];
+            }
+            else {
+                result -= numListNew[i+1];
+            }
+        }
 
-        return tmp;
+        return result;
 
     }
 
@@ -127,7 +162,7 @@ public class CalcActivity extends AppCompatActivity implements View.OnClickListe
                     //txtScreen.setText("Compute result");
                     // call function to cumpute the expression
                     computationResult = computeExpression(txtScreen.getText().toString());
-                    txtResult.setText(Integer.toString(computationResult));
+                    txtResult.setText("=" + Integer.toString(computationResult));
                 }
                 else{
                     txtResult.setText("The last character should be a number!");
@@ -138,46 +173,15 @@ public class CalcActivity extends AppCompatActivity implements View.OnClickListe
                     txtScreen.setText(currentScreen.substring(0, currentScreen.length()-1) + inputChar);
                 }
                 else {
-                    txtScreen.setText(currentScreen + inputChar);
+                    if (lastChar == '/' && inputChar.charAt(0) == '0'){ // cannot divide by 0
+                        break;
+                    }
+                    else {
+                        txtScreen.setText(currentScreen + inputChar);
+                    }
                 }
                 break;
         }
-
-        /*
-        // Check if it's after a number
-        if (afterNumber){
-            // Check if the input is a number
-            if (isNumber(btnID)){ // a number input
-
-            }
-            else { // a symbol input
-
-            }
-
-        }
-        else {
-
-        }
-
-        if (btnID == getResources().getIdentifier("btn1", "id", this.getPackageName())){
-            txtResult.setText("Clicked 1");
-        };
-        /*
-        switch (btnID){
-            case R.id.btn0:
-                if (currentResult != 0){
-                    currentResult = currentResult * 10;
-                    txtToPrint = txtToPrint + "0";
-                    txtResult.setText(txtToPrint);
-                }
-                break;
-            case R.id.btn1:
-
-                break;
-
-            default:
-        }
-        */
 
     }
 }
