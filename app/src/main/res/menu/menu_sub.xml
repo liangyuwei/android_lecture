@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="cn.zju.id21832004.liangyuwei.HelloActivity">
+    <item
+        android:id="@+id/upload_assignments"
+        android:orderInCategory="1"
+        android:title="@string/upload_assignments"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/calculator"
+        android:orderInCategory="2"
+        android:title="@string/calc_name"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/post_weibo"
+        android:orderInCategory="3"
+        android:title="@string/post_weibo_name"
+        app:showAsAction="never" />
+
+
+
+
+</menu>

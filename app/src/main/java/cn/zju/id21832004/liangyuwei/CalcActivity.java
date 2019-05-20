@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cn.iipc.android.tweetlib.SubmitProgram;
-import static java.lang.System.*;
 
 public class CalcActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -56,7 +55,7 @@ public class CalcActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_hello, menu);
+        getMenuInflater().inflate(R.menu.menu_sub, menu);
         return true;
     }
 
@@ -68,7 +67,7 @@ public class CalcActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.upload_assignments) {
             new SubmitProgram().doSubmit(this, "C2");//"B1");
             return true;
         }

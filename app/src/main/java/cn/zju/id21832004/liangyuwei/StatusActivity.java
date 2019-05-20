@@ -1,9 +1,7 @@
 package cn.zju.id21832004.liangyuwei;
 
-import android.content.ClipData;
-import android.content.Intent;
 import android.graphics.Color;
-import android.nfc.Tag;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -49,7 +47,7 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_hello, menu);
+        getMenuInflater().inflate(R.menu.menu_sub, menu);
         return true;
     }
 
@@ -61,7 +59,7 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.upload_assignments) {
             new SubmitProgram().doSubmit(this, "C3");//"C1");
             return true;
         }
@@ -100,4 +98,26 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
         if (count <= 0) txtCount.setTextColor(Color.RED);
 
     }
+
+    private final class postTask extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... params) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+    }
+
+
+
+
 }

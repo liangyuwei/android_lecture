@@ -2,9 +2,11 @@
 <resources>
     <string name="app_name">liangyuwei</string>
     <string name="hello_world">Hello World!</string>>
-    <string name="action_settings">Upload Assignment</string>
+    <string name="upload_assignments">Upload Assignment</string>
     <string name="times">×</string>
     <string name="package_name">Package name：cn.zju.id21832004.liangyuwei</string>
     <string name="btn_post_text">Post</string>
     <string name="edit_text">Write your comment...</string>
+    <string name="calc_name">Calculator</string>
+    <string name="post_weibo_name">Post Weibo</string>
 </resources>
