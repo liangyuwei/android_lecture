@@ -45,5 +45,12 @@
         android:title="@string/upload_assignments"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_close"
+        android:orderInCategory="100"
+        android:title=""
+        app:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_close_clear_cancel" />
+
 
 </menu>

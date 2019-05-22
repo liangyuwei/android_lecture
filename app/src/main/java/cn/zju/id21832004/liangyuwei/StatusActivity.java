@@ -60,7 +60,12 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.upload_assignments) {
-            new SubmitProgram().doSubmit(this, "D1");//"C3");//"C1");
+            new SubmitProgram().doSubmit(this, "D2");//"C3");//"C1");
+            return true;
+        }
+
+        if (id == R.id.action_close){
+            finish();
             return true;
         }
 

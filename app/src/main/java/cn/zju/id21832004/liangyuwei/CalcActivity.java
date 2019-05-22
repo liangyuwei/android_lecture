@@ -72,6 +72,11 @@ public class CalcActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
 
+        if (id == R.id.action_close){
+            finish();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

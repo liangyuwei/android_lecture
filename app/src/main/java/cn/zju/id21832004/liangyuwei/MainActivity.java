@@ -1,5 +1,6 @@
 package cn.zju.id21832004.liangyuwei;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -31,9 +32,19 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.upload_assignments) {
-            new SubmitProgram().doSubmit(this, "D?");//"C3");//"C1");
-            return true;
+        switch (id){
+            case R.id.upload_assignments:
+                new SubmitProgram().doSubmit(this, "D2");//"C3");//"C1");
+                return true;
+            case R.id.calculator:
+                startActivity(new Intent(this, CalcActivity.class));
+                return true;
+            case R.id.post_weibo:
+                startActivity(new Intent(this, StatusActivity.class));
+                return true;
+            case R.id.activate_service:
+            case R.id.deactivate_service:
+            case R.id.menu_settings:
         }
 
         return super.onOptionsItemSelected(item);
