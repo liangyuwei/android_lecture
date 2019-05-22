@@ -8,4 +8,8 @@
     <string name="edit_text">有什么新鲜事。。。</string>
     <string name="calc_name">计算器</string>
     <string name="post_weibo_name">发布微博</string>
+    <string name="activate_service_name">启动服务</string>
+    <string name="deactivate_service_name">停止服务</string>
+    <string name="menu_settings_name">选项设置</string>
+    <string name="file_test_name">文件测试</string>
 </resources>

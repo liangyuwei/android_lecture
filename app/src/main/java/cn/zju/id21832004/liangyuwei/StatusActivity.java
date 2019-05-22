@@ -13,8 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import cn.iipc.android.tweetlib.SubmitProgram;
-
+import android.widget.Toast;
+import cn.iipc.android.tweetlib.*;
 
 public class StatusActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
@@ -60,7 +60,7 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.upload_assignments) {
-            new SubmitProgram().doSubmit(this, "C3");//"C1");
+            new SubmitProgram().doSubmit(this, "D1");//"C3");//"C1");
             return true;
         }
 
@@ -70,11 +70,14 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {  // ???
         // 右键 implements 的View.OnClickListener，选择generate，选implement methods
-        editStatus.setText("Test button onClick");
+        //editStatus.setText("Test button onClick");
 
         // Log
         String status = editStatus.getText().toString();
         Log.d(TAG, "onClicked with status: " + status);
+
+        // Post
+        new PostTask().execute(status);
     }
 
 
@@ -99,25 +102,32 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    private final class postTask extends AsyncTask<String, Void, String>{
+    private final class PostTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
-            return null;
+            String username = "liangyuwei";
+            String password = "ipconfigall478";
+            YambaClient yambaCloud = new YambaClient(username, password);
+            try{
+                yambaCloud.postStatus(params[0]);
+                return "Successfully posted: " + params[0].length() + " chars";
+            } catch (YambaClientException e){
+                e.printStackTrace();
+                return "Failed to post to yamba service";
+            }
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Toast.makeText(StatusActivity.this, result, Toast.LENGTH_LONG).show();
+            pkgName.setText(result + " BY<" + getPackageName() +">");
+            if(result.startsWith("Successfully")){
+                editStatus.setText("");
+            }
         }
 
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
     }
-
-
-
 
 }

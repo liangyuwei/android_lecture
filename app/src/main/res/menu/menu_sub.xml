@@ -2,25 +2,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="cn.zju.id21832004.liangyuwei.HelloActivity">
+
     <item
-        android:id="@+id/upload_assignments"
+        android:id="@+id/post_weibo"
         android:orderInCategory="1"
-        android:title="@string/upload_assignments"
+        android:title="@string/post_weibo_name"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/activate_service"
+        android:orderInCategory="2"
+        android:title="@string/activate_service_name"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/deactivate_service"
+        android:orderInCategory="3"
+        android:title="@string/deactivate_service_name"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_settings"
+        android:orderInCategory="4"
+        android:title="@string/menu_settings_name"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/calculator"
-        android:orderInCategory="2"
+        android:orderInCategory="5"
         android:title="@string/calc_name"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/post_weibo"
-        android:orderInCategory="3"
-        android:title="@string/post_weibo_name"
+        android:id="@+id/file_test"
+        android:orderInCategory="6"
+        android:title="@string/file_test_name"
         app:showAsAction="never" />
 
-
+    <item
+        android:id="@+id/upload_assignments"
+        android:orderInCategory="7"
+        android:title="@string/upload_assignments"
+        app:showAsAction="never" />
 
 
 </menu>

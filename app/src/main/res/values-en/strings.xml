@@ -9,4 +9,8 @@
     <string name="edit_text">Write your comment...</string>
     <string name="calc_name">Calculator</string>
     <string name="post_weibo_name">Post Weibo</string>
+    <string name="activate_service_name">Activate Service</string>
+    <string name="deactivate_service_name">Stop Service</string>
+    <string name="menu_settings_name">Menu Settings</string>
+    <string name="file_test_name">File Test</string>
 </resources>
