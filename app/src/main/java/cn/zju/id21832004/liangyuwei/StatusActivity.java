@@ -1,10 +1,14 @@
 package cn.zju.id21832004.liangyuwei;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
@@ -111,8 +115,17 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
 
         @Override
         protected String doInBackground(String... params) {
-            String username = "liangyuwei";
-            String password = "ipconfigall478";
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(StatusActivity.this);
+            String username = prefs.getString("username", "");
+            String password = prefs.getString("password", "");
+
+            // Check if username and password are empty
+            if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
+                startActivity(new Intent(StatusActivity.this, SettingsActivity.class));
+                return "Please update your username and password.";
+            }
+
             YambaClient yambaCloud = new YambaClient(username, password);
             try{
                 yambaCloud.postStatus(params[0]);

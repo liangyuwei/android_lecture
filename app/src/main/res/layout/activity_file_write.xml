@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.zju.id21832004.liangyuwei.FileWriteActivity">
+
+    <Button
+        android:id="@+id/btnGetFileDir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_getfiledir_text"
+        />
+
+    <Button
+        android:id="@+id/btnGetExtStorageDir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_getexternalstoragedir_text" />
+
+    <Button
+        android:id="@+id/btnGetExtFileDir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_getexternalfiledir_text"/>
+
+    <TextView
+        android:id="@+id/txtFileWrite"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
+</TableLayout>

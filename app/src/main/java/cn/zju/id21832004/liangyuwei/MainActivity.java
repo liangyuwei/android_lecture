@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         switch (id){
             case R.id.upload_assignments:
-                new SubmitProgram().doSubmit(this, "D2");//"C3");//"C1");
+                new SubmitProgram().doSubmit(this, "E1");//"D2");//"C3");//"C1");
                 return true;
             case R.id.calculator:
                 startActivity(new Intent(this, CalcActivity.class));
@@ -42,9 +42,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.post_weibo:
                 startActivity(new Intent(this, StatusActivity.class));
                 return true;
+            case R.id.file_test:
+                startActivity(new Intent(this, FileWriteActivity.class));
+                return true;
             case R.id.activate_service:
             case R.id.deactivate_service:
             case R.id.menu_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

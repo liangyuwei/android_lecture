@@ -12,4 +12,13 @@
     <string name="deactivate_service_name">停止服务</string>
     <string name="menu_settings_name">选项设置</string>
     <string name="file_test_name">文件测试</string>
+    <string name="btn_getfiledir_text">获取文件路径</string>
+    <string name="btn_getexternalstoragedir_text">获取外部存储器目录</string>
+    <string name="btn_getexternalfiledir_text">获取外部存储器文件路径</string>
+    <string name="username">用户名：</string>
+    <string name="username_hint">请输入用户名</string>
+    <string name="password">密码：</string>
+    <string name="password_hint">请输入密码</string>
+    <string name="interval">刷新周期：</string>
+    <string name="interval_hint">微博刷新周期（秒）</string>
 </resources>

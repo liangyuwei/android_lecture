@@ -13,4 +13,13 @@
     <string name="deactivate_service_name">Stop Service</string>
     <string name="menu_settings_name">Menu Settings</string>
     <string name="file_test_name">File Test</string>
+    <string name="btn_getfiledir_text">Get Files Dir</string>
+    <string name="btn_getexternalstoragedir_text">Get External Storage Dir</string>
+    <string name="btn_getexternalfiledir_text">Get External Files Dir</string>
+    <string name="username">Username</string>
+    <string name="username_hint">Please enter your username.</string>
+    <string name="password">Password</string>
+    <string name="password_hint">Please enter your password.</string>
+    <string name="interval">Refresh period</string>
+    <string name="interval_hint">Weibo refresh period (second)</string>
 </resources>
