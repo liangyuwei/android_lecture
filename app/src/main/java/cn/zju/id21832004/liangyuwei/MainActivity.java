@@ -46,9 +46,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, FileWriteActivity.class));
                 return true;
             case R.id.activate_service:
+                startService(new Intent(this, UpdateService.class)); //
+                return true;
             case R.id.deactivate_service:
+                stopService(new Intent(this, UpdateService.class));
+                return true;
             case R.id.menu_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+            case R.id.get_music_info:
+                startActivity(new Intent(this, MusicActivity.class));
                 return true;
         }
 
