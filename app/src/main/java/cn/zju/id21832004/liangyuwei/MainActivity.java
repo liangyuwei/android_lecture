@@ -1,19 +1,77 @@
 package cn.zju.id21832004.liangyuwei;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.BaseColumns;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import cn.iipc.android.tweetlib.Status;
 import cn.iipc.android.tweetlib.SubmitProgram;
 
-public class MainActivity extends AppCompatActivity {
+
+
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+
+    private TextView pkgName;
+    private TextView text1;
+    SQLiteDatabase db;
+    Cursor cursor;
+    DbHelper dbhlp;
+
+    SimpleCursorAdapter adapter;
+    ListView listStatus;
+    private static final String[] FROM = {StatusContract.Column.USER,
+        StatusContract.Column.MESSAGE, StatusContract.Column.CREATED_AT};
+    private static final int[] TO = {R.id.textUser, R.id.textMsg, R.id.textTime};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        pkgName = (TextView) findViewById(R.id.pkgName);
+        pkgName.setText("Context: " + this.getPackageName());
+        listStatus = (ListView) findViewById(R.id.listStatus);
+
+        dbhlp = new DbHelper(this);
+        db = dbhlp.getReadableDatabase();
+        cursor = db.query(StatusContract.TABLE, null, null, null, null, null,
+                    StatusContract.DEFAULT_SORT);
+        startManagingCursor(cursor);
+
+        adapter = new SimpleCursorAdapter(this, R.layout.row, cursor, FROM, TO);
+        adapter.setViewBinder(new TimelineViewBinder());
+        listStatus.setAdapter(adapter);
+
+        listStatus.setOnItemClickListener(this);
+
+    }
+
+    // 删除onStart
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        db.close();
     }
 
 
@@ -34,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         switch (id){
             case R.id.upload_assignments:
-                new SubmitProgram().doSubmit(this, "E1");//"D2");//"C3");//"C1");
+                new SubmitProgram().doSubmit(this, "F2");//"D2");//"C3");//"C1");
                 return true;
             case R.id.calculator:
                 startActivity(new Intent(this, CalcActivity.class));
@@ -60,6 +118,49 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Cursor cursor = (Cursor) listStatus.getItemAtPosition(position);
+        String user = cursor.getString(cursor.getColumnIndex(StatusContract.Column.USER));
+        String msg = cursor.getString(cursor.getColumnIndex(StatusContract.Column.MESSAGE));
+
+        new AlertDialog.Builder(this).setTitle(user)
+                .setMessage(msg)
+                .setNegativeButton("关闭", null)
+                .show();
+
+    }
+
+    // Handles custom binding of data to view.
+    class TimelineViewBinder implements SimpleCursorAdapter.ViewBinder{
+        @Override
+        public boolean setViewValue(View view, Cursor cursor, int columnIndex){
+            switch (view.getId()){
+                case R.id.textUser:
+                    String usr = cursor.getString(columnIndex);
+                    ((TextView) view).setText(usr);
+                    return true;
+                case R.id.textMsg:
+                    String msg = cursor.getString(columnIndex);
+                    if(msg.length() > 60){
+                        msg = msg.substring(0, 60) + "......";
+                    }
+                    ((TextView) view).setText(msg);
+                    return  true;
+                case R.id.textTime:
+                    // Convert timestamp to relative time
+                    long timestamp = cursor.getLong(columnIndex); //
+
+                    CharSequence relativeTime = DateUtils.getRelativeTimeSpanString(timestamp);
+                    ((TextView) view).setText(relativeTime); //
+                    return true;
+                default:
+                    return true;
+            }
+
+        }
     }
 
 
