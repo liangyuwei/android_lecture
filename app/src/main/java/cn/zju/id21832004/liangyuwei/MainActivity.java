@@ -1,8 +1,10 @@
 package cn.zju.id21832004.liangyuwei;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -43,10 +45,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         StatusContract.Column.MESSAGE, StatusContract.Column.CREATED_AT};
     private static final int[] TO = {R.id.textUser, R.id.textMsg, R.id.textTime};
 
+    TimelineReceiver receiver;
+    IntentFilter filter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Create the receiver
+        receiver = new TimelineReceiver();
+        filter = new IntentFilter(StatusContract.NEW_STATUS);
 
         pkgName = (TextView) findViewById(R.id.pkgName);
         pkgName.setText("Context: " + this.getPackageName());
@@ -78,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_sub, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -104,11 +113,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(new Intent(this, FileWriteActivity.class));
                 return true;
             case R.id.activate_service:
-                startService(new Intent(this, UpdateService.class)); //
+                if (serviceRunning){
+                    stopService(new Intent(this, UpdateService.class));
+                    serviceRunning = false;
+                } else {
+                    startService(new Intent(this, UpdateService.class));
+                    serviceRunning = true;
+                }
                 return true;
-            case R.id.deactivate_service:
-                stopService(new Intent(this, UpdateService.class));
-                return true;
+            // case R.id.deactivate_service:
+            //     stopService(new Intent(this, UpdateService.class));
+            //    return true;
             case R.id.menu_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
@@ -117,6 +132,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return true;
             case R.id.action_close:
                 finish();
+                return true;
+            case R.id.action_delete:
+                SQLiteDatabase dbw = dbhlp.getWritableDatabase();
+                dbw.delete(StatusContract.TABLE, null, null);
+                cursor.requery();
+                adapter.notifyDataSetChanged();
+                Toast.makeText(this, "所有数据已经被删除！", Toast.LENGTH_LONG).show();
                 return true;
         }
 
@@ -133,8 +155,31 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 .setMessage(msg)
                 .setNegativeButton("关闭", null)
                 .show();
+    }
+
+    // Switch between two states
+    private boolean serviceRunning = false;
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu){
+        if(menu == null)
+            return true;
+
+        MenuItem toggleItem = menu.findItem(R.id.activate_service);
+        toggleItem.setChecked(serviceRunning);
+
+        if(serviceRunning){
+            toggleItem.setTitle(R.string.deactivate_service_name);
+            toggleItem.setIcon(android.R.drawable.ic_media_pause);
+        }
+        else {
+            toggleItem.setTitle(R.string.activate_service_name);
+            toggleItem.setIcon(android.R.drawable.ic_media_play);
+        }
+
+        return true;
 
     }
+
 
     // Handles custom binding of data to view.
     class TimelineViewBinder implements SimpleCursorAdapter.ViewBinder{
@@ -166,6 +211,35 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+    class TimelineReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent){
+
+            Log.d("TimelineReceiver", "onReceived");
+
+            int count = intent.getIntExtra("count", 0);
+
+            if (count > 0) {
+                cursor.requery();
+                adapter.notifyDataSetChanged();
+            }
+
+            Toast.makeText(MainActivity.this, "更新了" + count + "条记录。", Toast.LENGTH_LONG).show();
+
+        }
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        registerReceiver(receiver, filter);
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        unregisterReceiver(receiver);
+    }
 
 
 }

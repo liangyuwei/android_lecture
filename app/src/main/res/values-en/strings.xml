@@ -23,5 +23,6 @@
     <string name="interval">Refresh period</string>
     <string name="interval_hint">Weibo refresh period (second)</string>
     <string name="get_music_info">Get Music Info</string>
+    <string name="delete_db_data">Delete DB Data</string>
 
 </resources>

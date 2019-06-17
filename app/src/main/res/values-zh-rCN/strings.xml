@@ -23,4 +23,6 @@
     <string name="interval">刷新周期：</string>
     <string name="interval_hint">微博刷新周期（秒）</string>
     <string name="get_music_info">获取音乐</string>
+    <string name="delete_db_data">删除数据</string>
+
 </resources>

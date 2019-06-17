@@ -1,6 +1,7 @@
 package cn.zju.id21832004.liangyuwei;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -158,6 +159,11 @@ public class UpdateService extends Service implements SharedPreferences.OnShared
                             Log.d(TAG, String.format("%s, %s", usr, msg));
                         }
                     }// for
+                    if(count > 0){
+                        Intent bcast = new Intent(StatusContract.NEW_STATUS);
+                        bcast.putExtra("count", count);
+                        sendBroadcast(bcast);
+                    }
                 } catch (YambaClientException e){
                     Log.e(TAG, "Failed to fetch the timeline", e);
                     e.printStackTrace();
@@ -175,10 +181,7 @@ public class UpdateService extends Service implements SharedPreferences.OnShared
 
         } // run
 
-
-
     } // Updater
-
 
 
 }

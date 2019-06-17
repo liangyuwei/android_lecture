@@ -36,27 +36,6 @@ public class SettingsActivity extends AppCompatActivity {
             case R.id.upload_assignments:
                 new SubmitProgram().doSubmit(this, "E2"); //"C2");//"B1");
                 return true;
-            case R.id.calculator:
-                startActivity(new Intent(this, CalcActivity.class));
-                return true;
-            case R.id.post_weibo:
-                startActivity(new Intent(this, StatusActivity.class));
-                return true;
-            case R.id.file_test:
-                startActivity(new Intent(this, FileWriteActivity.class));
-                return true;
-            case R.id.activate_service:
-                startService(new Intent(this, UpdateService.class)); //
-                return true;
-            case R.id.deactivate_service:
-                stopService(new Intent(this, UpdateService.class));
-                return true;
-            case R.id.menu_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                return true;
-            case R.id.get_music_info:
-                startActivity(new Intent(this, MusicActivity.class));
-                return true;
             case R.id.action_close:
                 finish();
                 return true;
