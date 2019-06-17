@@ -45,8 +45,8 @@ public class UpdateService extends Service implements SharedPreferences.OnShared
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         DELAY = Long.parseLong(prefs.getString("interval", "60")) * 1000;
-        username = prefs.getString("username", "student");
-        password = prefs.getString("password", "password");
+        username = prefs.getString("username", "student"); // default value is "student"
+        password = prefs.getString("password", "password"); // default value is "password"
 
         // register Listener
         prefs.registerOnSharedPreferenceChangeListener(this);

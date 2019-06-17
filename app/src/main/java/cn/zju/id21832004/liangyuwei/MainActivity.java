@@ -115,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case R.id.get_music_info:
                 startActivity(new Intent(this, MusicActivity.class));
                 return true;
+            case R.id.action_close:
+                finish();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

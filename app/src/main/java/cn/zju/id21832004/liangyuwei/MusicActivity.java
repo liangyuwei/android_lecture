@@ -32,7 +32,7 @@ public class MusicActivity extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }else {
-            read_musice_info();
+            read_music_info();
         }
 
     }
@@ -57,20 +57,40 @@ public class MusicActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.upload_assignments) {
-            new SubmitProgram().doSubmit(this, "F1");//"E1"); //"D2");//"C3");//"C1");
-            return true;
-        }
-
-        if (id == R.id.action_close){
-            finish();
-            return true;
+        switch (id){
+            case R.id.upload_assignments:
+                new SubmitProgram().doSubmit(this, "F1");//"E1"); //"D2");//"C3");//"C1");
+                return true;
+            case R.id.calculator:
+                startActivity(new Intent(this, CalcActivity.class));
+                return true;
+            case R.id.post_weibo:
+                startActivity(new Intent(this, StatusActivity.class));
+                return true;
+            case R.id.file_test:
+                startActivity(new Intent(this, FileWriteActivity.class));
+                return true;
+            case R.id.activate_service:
+                startService(new Intent(this, UpdateService.class)); //
+                return true;
+            case R.id.deactivate_service:
+                stopService(new Intent(this, UpdateService.class));
+                return true;
+            case R.id.menu_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+            case R.id.get_music_info:
+                startActivity(new Intent(this, MusicActivity.class));
+                return true;
+            case R.id.action_close:
+                finish();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void read_musice_info(){
+    private void read_music_info(){
 
         ContentResolver provider = getContentResolver();
         Cursor cursor = provider.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -94,7 +114,7 @@ public class MusicActivity extends AppCompatActivity {
         switch (requestCode){
             case 1:
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    read_musice_info();
+                    read_music_info();
                 }else{
                     Toast.makeText(this, "You denied the permission", Toast.LENGTH_SHORT).show();
                 }

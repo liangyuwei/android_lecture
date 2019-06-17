@@ -45,6 +45,14 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
 
         editStatus.addTextChangedListener(this); // editStatus is the "publisher", i.e. from which the event is listened
 
+        // Init
+        int count = 140 - editStatus.length();
+        txtCount.setText(Integer.toString(count));
+
+        txtCount.setTextColor(Color.GREEN);
+        if (count <= 10) txtCount.setTextColor(Color.YELLOW);
+        if (count <= 0) txtCount.setTextColor(Color.RED);
+
     }
 
 
@@ -63,15 +71,37 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.upload_assignments) {
-            new SubmitProgram().doSubmit(this, "D2");//"C3");//"C1");
-            return true;
+        switch (id){
+            case R.id.upload_assignments:
+                new SubmitProgram().doSubmit(this, "D2");//"C3");//"C1");
+                return true;
+            case R.id.calculator:
+                startActivity(new Intent(this, CalcActivity.class));
+                return true;
+            case R.id.post_weibo:
+                startActivity(new Intent(this, StatusActivity.class));
+                return true;
+            case R.id.file_test:
+                startActivity(new Intent(this, FileWriteActivity.class));
+                return true;
+            case R.id.activate_service:
+                startService(new Intent(this, UpdateService.class)); //
+                return true;
+            case R.id.deactivate_service:
+                stopService(new Intent(this, UpdateService.class));
+                return true;
+            case R.id.menu_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+            case R.id.get_music_info:
+                startActivity(new Intent(this, MusicActivity.class));
+                return true;
+            case R.id.action_close:
+                finish();
+                return true;
         }
 
-        if (id == R.id.action_close){
-            finish();
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
