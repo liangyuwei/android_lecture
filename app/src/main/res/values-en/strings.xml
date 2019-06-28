@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">liangyuwei</string>
+    <string name="weibo_info_list">Weibo List</string>
     <string name="hello_world">Hello World!</string>>
     <string name="upload_assignments">Upload Assignment</string>
     <string name="times">×</string>

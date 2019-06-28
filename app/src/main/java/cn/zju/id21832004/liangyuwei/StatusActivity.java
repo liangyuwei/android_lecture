@@ -126,8 +126,8 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
         protected String doInBackground(String... params) {
 
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(StatusActivity.this);
-            String username = prefs.getString("username", "");
-            String password = prefs.getString("password", "");
+            String username = prefs.getString("username", "liangyuwei");
+            String password = prefs.getString("password", "ipconfigall478");
 
             // Check if username and password are empty
             if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){

@@ -45,9 +45,9 @@ public class UpdateService extends Service implements SharedPreferences.OnShared
         super.onCreate();
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        DELAY = Long.parseLong(prefs.getString("interval", "60")) * 1000;
-        username = prefs.getString("username", "student"); // default value is "student"
-        password = prefs.getString("password", "password"); // default value is "password"
+        DELAY = Long.parseLong(prefs.getString("interval", "10")) * 1000;
+        username = prefs.getString("username", "liangyuwei"); // default value is "student"
+        password = prefs.getString("password", "ipconfigall478"); // default value is "password"
 
         // register Listener
         prefs.registerOnSharedPreferenceChangeListener(this);
@@ -91,13 +91,13 @@ public class UpdateService extends Service implements SharedPreferences.OnShared
     @Override
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
         if (key.equals("username"))
-            username = prefs.getString("username", "student");
+            username = prefs.getString("username", "liangyuwei");
 
         if (key.equals("password"))
-            password = prefs.getString("password", "password");
+            password = prefs.getString("password", "ipconfigall478");
 
         if (key.equals("interval"))
-            DELAY = Long.parseLong(prefs.getString("interval", "60")) * 1000;
+            DELAY = Long.parseLong(prefs.getString("interval", "10")) * 1000;
 
     }
 
